@@ -31,3 +31,8 @@ const getCountryData = function (country) {
 };
 
 getCountryData('bharat');
+getCountryData('portugal');
+getCountryData('usa');
+getCountryData('bharat');
+getCountryData('portugal');
+getCountryData('usa');
