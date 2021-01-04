@@ -5,14 +5,19 @@ const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
 const getCountryData = function (country) {
-  const request = new XMLHttpRequest();
-  request.open('GET', `https://restcountries.eu/rest/v2/name/${country}`);
-  request.send();
+  // const request = new XMLHttpRequest();
+  // request.open('GET', `https://restcountries.eu/rest/v2/name/${country}`);
+  // request.send();
 
-  request.addEventListener('load', function () {
-    const [data] = JSON.parse(this.responseText);
+  // request.addEventListener('load', function () {
+  //   const [data] = JSON.parse(this.responseText);
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
 
-    const html = `<article class="country">
+const renderCountry = function (data) {
+  const html = `<article class="country">
   <img class="country__img" src="${data.flag}" />
   <div class="country__data">
     <h3 class="country__name">${data.name}</h3>
@@ -25,9 +30,8 @@ const getCountryData = function (country) {
   </div>
 </article>`;
 
-    countriesContainer.insertAdjacentHTML('beforeend', html);
-    countriesContainer.style.opacity = 1;
-  });
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
 };
 
 getCountryData('bharat');
